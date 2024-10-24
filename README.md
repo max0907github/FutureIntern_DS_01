@@ -1,3 +1,5 @@
+**HOUSE PRICE PREDICTION MODEL**
+
 To help you build the House Price Prediction model and set up everything, including the code and the README for your GitHub repository, here’s how we can approach it:
 
 ### Step 1: Prepare the Environment
