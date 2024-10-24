@@ -171,5 +171,5 @@ seaborn==0.11.2
 ### Step 7: Test the Setup
 Ensure that everything works by running the project locally and checking the README for clarity.
 
-Let me know if you need help with a specific part of the process, such as improving the model or dataset handling!
+
 
