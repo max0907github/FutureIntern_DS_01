@@ -1,5 +1,4 @@
-![image](https://github.com/user-attachments/assets/bda7a3df-90d1-4107-89d6-09fb2a96f1ae)
-
+![image](https://github.com/user-attachments/assets/48a4af80-34ad-4ee7-90dc-f12d4a94d170)
 # House Price Prediction Model
 
 This project builds a machine learning model to predict house prices using historical housing data. The dataset includes various features about properties, such as the number of rooms, location details, building characteristics, and other factors influencing housing prices.
