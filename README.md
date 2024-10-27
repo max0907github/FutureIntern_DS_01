@@ -80,5 +80,5 @@ The two error metrics serve to evaluate the model's prediction accuracy:
     - Purpose: Calculates the square root of the average squared differences between predicted and actual values, giving more weight to larger errors.
     - Role in Process: RMSE is useful when large errors are a concern. It highlights cases where predictions deviate significantly from actual values, allowing us to understand the robustness of the model in handling outliers.
 
-# Together, MAE and RMSE provide a balanced view of the model's performance, with RMSE providing insight into significant outliers and MAE giving an overall sense of prediction accuracy. 
+**Together, MAE and RMSE provide a balanced view of the model's performance, with RMSE providing insight into significant outliers and MAE giving an overall sense of prediction accuracy.** 
 
