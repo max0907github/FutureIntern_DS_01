@@ -1,177 +1,90 @@
-**HOUSE PRICE PREDICTION MODEL**
+# House Price Prediction Model
 
-To help you build the House Price Prediction model and set up everything, including the code and the README for your GitHub repository, here’s how we can approach it:
-
-### Step 1: Prepare the Environment
-We will use Python for the machine learning model with libraries like:
-- **pandas** for data manipulation
-- **scikit-learn** for building and training the model
-- **matplotlib** and **seaborn** for visualizations (optional)
-
-Ensure that you have the following libraries installed in your environment:
-```bash
-pip install pandas scikit-learn matplotlib seaborn
-```
-
-### Step 2: Dataset (Optional)
-For house price prediction, you can use a dataset like the [Kaggle Housing Prices dataset](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data) or any other housing dataset you have. If you need a sample dataset, you can use one provided by `sklearn` for simplicity.
-
-### Step 3: Code to Build the Model
-
-Here’s the structure of the code that includes data preprocessing, model training, evaluation, and visualization.
-
-```python
-# Import necessary libraries
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.metrics import mean_squared_error
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# Step 1: Load the dataset
-# You can replace 'your_dataset.csv' with the actual dataset path
-data = pd.read_csv('your_dataset.csv')
-
-# Step 2: Explore the dataset (optional for visualization)
-print(data.head()) # First few rows of the dataset
-print(data.describe()) # Summary statistics
-
-# Step 3: Data Preprocessing
-# Handling missing values (example)
-data.fillna(data.mean(), inplace=True)
-
-# Extract features and target
-X = data[['square_footage', 'num_bedrooms']]  # Select relevant features
-y = data['house_price']  # Target variable
-
-# Split into training and test sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Scale the features
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
-
-# Step 4: Model Training - Linear Regression
-lr_model = LinearRegression()
-lr_model.fit(X_train_scaled, y_train)
-
-# Step 5: Model Training - Decision Tree
-dt_model = DecisionTreeRegressor()
-dt_model.fit(X_train_scaled, y_train)
-
-# Step 6: Model Evaluation
-lr_predictions = lr_model.predict(X_test_scaled)
-dt_predictions = dt_model.predict(X_test_scaled)
-
-# Calculate Mean Squared Error
-lr_mse = mean_squared_error(y_test, lr_predictions)
-dt_mse = mean_squared_error(y_test, dt_predictions)
-
-print(f"Linear Regression MSE: {lr_mse}")
-print(f"Decision Tree MSE: {dt_mse}")
-
-# Step 7: Visualization (optional)
-# Plot true vs predicted house prices
-plt.figure(figsize=(10, 5))
-sns.scatterplot(x=y_test, y=lr_predictions, label="Linear Regression Predictions")
-sns.scatterplot(x=y_test, y=dt_predictions, label="Decision Tree Predictions")
-plt.xlabel("True House Prices")
-plt.ylabel("Predicted House Prices")
-plt.legend()
-plt.show()
-```
-
-### Step 4: Create the `README.md`
-
-The `README.md` should guide the user on what the project does, how to set it up, and how to run it.
-
-```markdown
-# House Price Prediction
-
-## Overview
-This project predicts house prices based on features like square footage and the number of bedrooms. It uses machine learning models such as **Linear Regression** and **Decision Trees** to estimate the price of houses. The model's accuracy is evaluated using **Mean Squared Error (MSE)**.
-
-## Technologies Used
-- Python
-- pandas (for data manipulation)
-- scikit-learn (for model building and evaluation)
-- matplotlib & seaborn (for visualizations)
-
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/house-price-prediction.git
-   cd house-price-prediction
-   ```
-
-2. Install the necessary packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## Running the Project
-
-1. Place the dataset in the project folder (or use the default dataset provided).
-2. Run the script to train the model and see the results:
-   ```bash
-   python main.py
-   ```
+This project builds a machine learning model to predict house prices using historical housing data. The dataset includes various features about properties, such as the number of rooms, location details, building characteristics, and other factors influencing housing prices.
 
 ## Project Structure
-- `main.py`: Contains the code for data preprocessing, model training, and evaluation.
-- `README.md`: This file, explaining the project.
-- `your_dataset.csv`: Example dataset used for the prediction.
 
-## Model Evaluation
-- The model uses **Mean Squared Error (MSE)** to evaluate its performance. Lower MSE values indicate better performance.
+- `FUTUREINTERN_DS_01_House_Price_Prediction_Model.ipynb`: The main Jupyter Notebook containing code for training, evaluating, and generating predictions.
+- `HP_train.csv`: The training dataset with historical house prices and features.
+- `HP_test.csv`: The test dataset used to generate final house price predictions.
+- `house_price_predictions.csv`: The output file containing predicted house prices for each property in the test dataset.
+
+## How to Use
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/House_Price_Prediction_Model.git
+    cd House_Price_Prediction_Model
+    ```
+
+2. Install the required libraries:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. Run the Jupyter Notebook to train the model and generate predictions. After completion, `house_price_predictions.csv` will be created with the predicted prices.
+
+## Data Processing and Model Training
+
+The model uses a Random Forest Regressor to predict house prices. Key steps include:
+
+- **Data Preprocessing**: Missing values are handled, categorical data is encoded, and numerical features are imputed.
+- **Model Training**: The Random Forest model is trained on the processed dataset.
+- **Evaluation**: The model is evaluated using Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).
+
+## Output File: `house_price_predictions.csv`
+
+This file contains two columns:
+- **Id**: The unique identifier for each property in the test dataset.
+- **SalePrice**: The model’s predicted sale price for each property.
+
+The predictions can be used to understand the approximate market value of each property based on the features included in the test dataset.
+
+## Model Evaluation Metrics
+
+The model performance is evaluated using the following metrics:
+
+- **Mean Absolute Error (MAE)**: Represents the average absolute difference between predicted and actual values. Lower MAE indicates better model performance. In this project, MAE helps us understand how close the model's predictions are to actual sale prices on average.
+
+- **Root Mean Squared Error (RMSE)**: This metric gives additional weight to larger errors, which can be useful if outliers are important in assessing model accuracy. In this project, RMSE provides insight into how well the model performs in scenarios with significant deviations from the mean.
+
+Both MAE and RMSE help in evaluating model performance, with RMSE being particularly sensitive to larger errors, making it useful for assessing the overall robustness of the model.
+
+## Future Improvements
+
+1. Experiment with different regression algorithms like XGBoost or LightGBM for potentially improved accuracy.
+2. Tune hyperparameters using grid search or randomized search.
+3. Explore feature engineering to create more relevant features from existing data.
+
+---
+
+**License**: MIT
 ```
 
-### Step 5: Create the `requirements.txt`
+---
 
-This file ensures anyone can install the dependencies needed to run the project. You can generate it using:
+### Explanation of `house_price_predictions.csv`
 
-```bash
-pip freeze > requirements.txt
-```
+The `house_price_predictions.csv` file is the final output of the model. It contains:
 
-Example content for `requirements.txt`:
+1. **Id**: Unique identifiers corresponding to each property in the test dataset.
+2. **SalePrice**: The predicted sale price generated by the model.
 
-```
-pandas==1.3.3
-scikit-learn==0.24.2
-matplotlib==3.4.3
-seaborn==0.11.2
-```
+This file can be used to assess house prices based on model predictions, helpful for real estate insights or market trend analysis.
 
-### Step 6: Push to GitHub
-1. Initialize a Git repository:
-   ```bash
-   git init
-   ```
+---
 
-2. Add the files:
-   ```bash
-   git add .
-   ```
+### Explanation of MAE and RMSE
 
-3. Commit the changes:
-   ```bash
-   git commit -m "Initial commit for House Price Prediction project"
-   ```
+The two error metrics serve to evaluate the model's prediction accuracy:
 
-4. Link it to your GitHub repository:
-   ```bash
-   git remote add origin https://github.com/your-username/house-price-prediction.git
-   git push -u origin main
-   ```
+- **Mean Absolute Error (MAE)**: 
+    - Purpose: Calculates the average magnitude of errors in predictions without considering their direction (i.e., whether they’re over or under).
+    - Role in Process: Helps gauge the model’s average predictive error, allowing us to see how close, on average, the model’s predictions are to actual prices.
 
-### Step 7: Test the Setup
-Ensure that everything works by running the project locally and checking the README for clarity.
+- **Root Mean Squared Error (RMSE)**:
+    - Purpose: Calculates the square root of the average squared differences between predicted and actual values, giving more weight to larger errors.
+    - Role in Process: RMSE is useful when large errors are a concern. It highlights cases where predictions deviate significantly from actual values, allowing us to understand the robustness of the model in handling outliers.
 
-
+Together, MAE and RMSE provide a balanced view of the model's performance, with RMSE providing insight into significant outliers and MAE giving an overall sense of prediction accuracy. 
 
